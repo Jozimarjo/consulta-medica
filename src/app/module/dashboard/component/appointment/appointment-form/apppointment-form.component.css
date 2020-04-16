@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  width: 23%;
+  flex-direction: column;
+}
+
+.doct {
+  width: 100%;
+}
+
+.in-line {
+  display: flex;
+  justify-content: space-between;
+}
+.mat-form-field {
+  display: contents;
+}

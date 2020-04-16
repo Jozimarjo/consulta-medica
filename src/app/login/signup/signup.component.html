@@ -1,0 +1,35 @@
+<form #form="ngForm" style="height: 100%" (ngSubmit)="form.valid && onSubmit()">
+  <div class="login-container">
+    <h1 class="title">Cadastro</h1>
+
+    <div class="login-input-container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nome</mat-label>
+        <input required type="text" matInput name="nome" #nome="ngModel" [(ngModel)]="login.name">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input required type="email" name="email" #email="ngModel" email matInput placeholder="Ex. email@email.com"
+               [(ngModel)]="login.email">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha</mat-label>
+        <input required minlength="6" type="password" matInput name="password" #password="ngModel"
+               [(ngModel)]="login.password">
+      </mat-form-field>
+    </div>
+    <app-error-message *ngIf="error?.error" [error]="error" (toggleError)="toggleError()"></app-error-message>
+
+    <div class="button-container">
+      <button type="submit" class="button-login" mat-stroked-button color="primary">Finalizar</button>
+      <button type="submit" (click)="changeSignup.next()" mat-stroked-button color="warn">
+        Voltar
+      </button>
+    </div>
+
+  </div>
+
+
+</form>

@@ -1,0 +1,27 @@
+<form #form="ngForm" style="height: 100%" (ngSubmit)="form.valid && onSubmit()" *ngIf="!signup">
+  <div class="login-container">
+    <h1 class="title">Login</h1>
+
+    <div class="login-input-container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input required type="email" name="email" #email="ngModel" matInput placeholder="Ex. email@email.com"
+               [(ngModel)]="login.email">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha</mat-label>
+        <input required type="password" matInput name="password" #password="ngModel" [(ngModel)]="login.password">
+      </mat-form-field>
+    </div>
+    <app-error-message *ngIf="error?.error" [error]="error" (toggleError)="toggleError()"></app-error-message>
+
+    <button type="submit" class="button-login" mat-stroked-button color="primary">Entrar</button>
+    <div style="display: flex;justify-content: center;">
+      <span>Não tem uma conta? </span> <a (click)="signup=true; " [routerLink]="[]" style="color:#0095f6;">
+      Cadastre-se</a>
+    </div>
+  </div>
+
+</form>
+<app-signup *ngIf="signup" (changeSignup)="changeSignup()"></app-signup>

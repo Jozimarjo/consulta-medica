@@ -1,0 +1,13 @@
+.error {
+  width: 100%;
+  background-color: #ffdce0;
+
+}
+
+.label {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color:#86181d;
+}

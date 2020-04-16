@@ -1,0 +1,44 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  padding: 23px 26px 0 26px;
+  border-radius: 10px;
+  background: #fff;
+  height: 100%;
+}
+
+.login-container .title {
+  width: 100%;
+  float: left;
+  line-height: 46px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ED2553;
+  position: relative;
+
+}
+
+.login-container .login-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-login {
+}
+
+.mat-form-field {
+  margin-top: 14px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0 0;
+
+}
+
+.button-container button + button {
+  margin-top: 12px;
+}
+

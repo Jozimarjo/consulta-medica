@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button (click)="sidenav.toggle()" mat-icon-button aria-label="Example icon button with a menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Bem vindo</h1>
+    <span class="example-spacer"></span>
+    <button (click)="logout()" mat-icon-button>
+    <i class="material-icons md-18" style="font-size: 36px">power_settings_new</i>
+    </button>
+
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span style="font-size: 12px;">Sistema De Agendamento de Consulta médica</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <div style="display: flex">
+        <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'appointment/form'" >  <mat-icon>home</mat-icon> Agendar Consulta </a>
+      </div>
+      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'appointment'"> Listar Consultas </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <mat-card class="header-card">
+        <mat-card-title>Listagem de Consultas</mat-card-title>
+        <mat-card-content> Consultas em aberto</mat-card-content>
+      </mat-card>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+

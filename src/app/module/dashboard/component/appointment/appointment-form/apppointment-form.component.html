@@ -1,0 +1,40 @@
+<mat-card class="header-card">
+  <!--<mat-card-title>Marcar Consulta</mat-card-title>-->
+  <form #form="ngForm" (ngSubmit)="form.valid && onSubmit(form)">
+    <div class="container">
+      <div class="doct">
+
+        <mat-form-field>
+          <mat-label>Selecione um Medico</mat-label>
+          <mat-select required name="doctor" #doctor="ngModel" [(ngModel)]="model.doctor" (ngModelChange)="resetValues()">
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor">
+              {{doctor.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div class="in-line">
+        <mat-form-field *ngIf="form.controls['doctor']?.valid">
+          <mat-label>Selecione um Data</mat-label>
+          <input required matInput [matDatepicker]="picker" name="date" #date="ngModel" [(ngModel)]="model.date"
+                 (ngModelChange)="loadHours(form.value.date)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="form.controls['date']?.valid">
+          <mat-label>Selecione um horario</mat-label>
+          <mat-select required #horas="ngModel" name="horas" [(ngModel)]="hora">
+            <mat-option *ngFor="let food of hour" [value]="food">
+              {{food}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit"> Confirmar Consulta</button>
+    </div>
+  </form>
+</mat-card>
