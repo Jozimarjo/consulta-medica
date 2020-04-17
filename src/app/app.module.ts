@@ -11,17 +11,16 @@ import {FormsModule} from "@angular/forms";
 import {DashboardModule} from "./module/dashboard/dashboard.module";
 import {LoginService} from "./login/login.service";
 import {HttpClientModule} from "@angular/common/http";
-import { SignupComponent } from './login/signup/signup.component';
+import {SignupComponent} from './login/signup/signup.component';
 import {MatIconModule} from '@angular/material/icon';
-import { ErrorMessageComponent } from './component/error-message/error-message.component';
 import {RouterGuard} from "./guard/router.guard";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ErrorMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +32,8 @@ import {RouterGuard} from "./guard/router.guard";
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
 
   ],
   entryComponents: [LoginComponent],

@@ -3,10 +3,12 @@
   <form #form="ngForm" (ngSubmit)="form.valid && onSubmit(form)">
     <div class="container">
       <div class="doct">
+        <app-message *ngIf="alertMessage.show" [msg]="alertMessage.msg" [error]="alertMessage.error" (toggleMsg)="toggleMsg()"></app-message>
 
         <mat-form-field>
           <mat-label>Selecione um Medico</mat-label>
-          <mat-select required name="doctor" #doctor="ngModel" [(ngModel)]="model.doctor" (ngModelChange)="resetValues()">
+          <mat-select required name="doctor" #doctor="ngModel" [(ngModel)]="model.doctor"
+                      (ngModelChange)="resetValues()">
             <mat-option *ngFor="let doctor of doctors" [value]="doctor">
               {{doctor.name}}
             </mat-option>
@@ -33,7 +35,6 @@
           </mat-select>
         </mat-form-field>
       </div>
-
       <button mat-raised-button color="primary" type="submit"> Confirmar Consulta</button>
     </div>
   </form>

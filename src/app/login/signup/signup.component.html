@@ -20,7 +20,7 @@
                [(ngModel)]="login.password">
       </mat-form-field>
     </div>
-    <app-error-message *ngIf="error?.error" [error]="error" (toggleError)="toggleError()"></app-error-message>
+    <app-message *ngIf="error?.error" [msg]="error?.message" [error]="true" (toggleMsg)="toggleError()"></app-message>
 
     <div class="button-container">
       <button type="submit" class="button-login" mat-stroked-button color="primary">Finalizar</button>

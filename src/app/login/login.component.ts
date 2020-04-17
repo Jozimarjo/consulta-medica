@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
@@ -18,7 +18,7 @@ class Error {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public signup = false;
   public login = new Login();
   public error = new Error();
@@ -41,8 +41,10 @@ export class LoginComponent implements OnInit {
     this.error.error = false
   }
 
+  ngOnDestroy(): void {
+  }
+
   ngOnInit() {
-    console.log('INIT LOGIN')
   }
 
   onSubmit() {

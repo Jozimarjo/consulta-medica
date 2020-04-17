@@ -12,18 +12,19 @@ import {
   MatToolbarModule
 } from "@angular/material";
 import {MatIconModule} from '@angular/material/icon';
-import { ApppointmentFormComponent } from './component/appointment/appointment-form/apppointment-form.component';
+import {ApppointmentFormComponent} from './component/appointment/appointment-form/apppointment-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppointmentFormService} from "./component/appointment/appointment-form.service";
 import {HttpClientModule} from "@angular/common/http";
+import {MessageComponent} from "../../component/message/message.component";
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     AppointmentComponent,
+    MessageComponent,
     ApppointmentFormComponent,
-
   ],
   imports: [
     CommonModule,
@@ -46,8 +47,11 @@ import {HttpClientModule} from "@angular/common/http";
     DashboardRoutingModule,
     HttpClientModule
   ],
+  exports: [MessageComponent],
   bootstrap: [DashboardComponent],
-  providers:[AppointmentFormService]
+  providers:
+    [AppointmentFormService]
 })
+
 export class DashboardModule {
 }

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AppointmentFormService} from "../appointment-form.service";
 import {map} from "rxjs/operators";
+import {LoginService} from "../../../../../login/login.service";
+import {DashboardService} from "../../../dashboard.service";
 
 class Appointment {
   doctor: any;
@@ -12,8 +14,14 @@ class Appointment {
 class User {
   id: number;
   name: string;
+  email: string
 }
 
+class Message {
+  show: boolean;
+  error: boolean;
+  msg: string
+}
 
 @Component({
   selector: 'app-apppointment-form',
@@ -23,17 +31,27 @@ class User {
 
 export class ApppointmentFormComponent implements OnInit {
 
-  doctors: any = [];
   public model: Appointment = new Appointment();
-  public hour;
+
+  public doctors: any = [];
+
+  public hour: any = [];
+
   public hora: any;
 
-  constructor(private appointService: AppointmentFormService) {
+  public user: User;
 
+  public alertMessage: Message;
 
+  constructor(private appointService: AppointmentFormService,
+              private loginService: LoginService,
+              private dashboardService: DashboardService) {
+    this.user = loginService.user;
+    this.alertMessage = new Message();
   }
 
   ngOnInit() {
+    this.dashboardService.currentUrl.next()
     this.appointService.getAllDoctors().subscribe(
       res => this.doctors = res,
       err => console.log(err)
@@ -42,6 +60,7 @@ export class ApppointmentFormComponent implements OnInit {
 
   loadHours(date) {
     this.hour = []
+    if(this.model.doctor)
     this.appointService.getAllHoursForDoctorandDay(this.model.doctor.id, date.toISOString()).pipe(map((res: number[]) => res.map(re => re.toString().concat(':00')))).subscribe(
       res => this.hour = res
     )
@@ -56,12 +75,25 @@ export class ApppointmentFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     let formatDate = new Date(this.model.date.getFullYear(), this.model.date.getMonth(), this.model.date.getDate(), (parseInt(this.hora) - 4)).toISOString();
     let appointment: Appointment = {
-      doctor: this.model.doctor, user: {id: 1, name: ''}, date: formatDate
+      doctor: this.model.doctor, user: this.user, date: formatDate
     }
     this.appointService.createAppointment(appointment).subscribe(
-      res => this.cleanForm(form),
-      err => console.log(err)
+      res => {
+        this.alertMessage.msg = 'Consulta marcada com sucesso';
+        this.alertMessage.error = false;
+        this.alertMessage.show = true;
+        this.cleanForm(form)
+      },
+      err => {
+        this.alertMessage.msg = 'Error ao marcar a consulta';
+        this.alertMessage.error = true;
+        this.alertMessage.show = true;
+      }
     )
+  }
+
+  toggleMsg() {
+    this.alertMessage.show = false
   }
 
   cleanForm(form: NgForm) {

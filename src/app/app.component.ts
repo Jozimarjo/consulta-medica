@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {LoginComponent} from "./login/login.component";
 import {Router} from "@angular/router";
+import {LoginService} from "./login/login.service";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class AppComponent implements OnInit {
   title = 'front-agendamento';
 
-  constructor(public dialog: MatDialog, private router: Router) {
+  constructor(public dialog: MatDialog, private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   openDialog(): void {
-    if (!localStorage.getItem('usuario')) {
+    if (!localStorage.getItem('usuario') && this.router.url == '/login') {
       const dialogRef = this.dialog.open(LoginComponent, {
           width: '460px',
           height: '507px',
@@ -28,11 +29,12 @@ export class AppComponent implements OnInit {
         })
       ;
       dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('usuario', JSON.stringify(result))
+        localStorage.setItem('usuario', JSON.stringify(result));
+        this.loginService.login.next(true);
+
         this.router.navigate(['/dashboard/appointment']);
       });
-    }
-    else this.router.navigate(['/dashboard/appointment']);
+    } else this.router.navigate(['/dashboard/appointment']);
 
   }
 }

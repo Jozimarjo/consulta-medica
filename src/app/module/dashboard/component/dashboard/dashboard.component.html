@@ -6,7 +6,7 @@
     <h1>Bem vindo</h1>
     <span class="example-spacer"></span>
     <button (click)="logout()" mat-icon-button>
-    <i class="material-icons md-18" style="font-size: 36px">power_settings_new</i>
+      <i class="material-icons md-18" style="font-size: 36px">power_settings_new</i>
     </button>
 
   </mat-toolbar-row>
@@ -19,16 +19,18 @@
   <mat-sidenav #sidenav>
     <mat-nav-list>
       <div style="display: flex">
-        <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'appointment/form'" >  <mat-icon>home</mat-icon> Agendar Consulta </a>
+        <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'appointment/form'">
+          <mat-icon>home</mat-icon>
+          Agendar Consulta </a>
       </div>
-      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'appointment'"> Listar Consultas </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'appointment'"> Listar Consultas </a>
 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <div style="height: 88vh;">
       <mat-card class="header-card">
-        <mat-card-title>Listagem de Consultas</mat-card-title>
+        <mat-card-title>{{currentPage === '/dashboard/appointment' ? 'Listagem de consultas' : 'Cadastro de consultas'}}</mat-card-title>
         <mat-card-content> Consultas em aberto</mat-card-content>
       </mat-card>
       <router-outlet></router-outlet>

@@ -1,21 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {map} from "rxjs/operators";
-
-class User {
-  id: number;
-  name: string;
-  email:string;
-}
+import {LoginService} from "../../../../login/login.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentFormService {
-  private user: User = new User();
 
   constructor(private httpClient: HttpClient) {
-    this.user = JSON.parse(localStorage.getItem('usuario'));
   }
 
   public getAllDoctors() {
@@ -32,8 +25,8 @@ export class AppointmentFormService {
 
   }
 
-  public getAllAppointments() {
-    return this.httpClient.get(`http://localhost:8080/appointment/${this.user.id}`).pipe(map((res: HttpResponse<any>) => res.body), map(valor => {
+  public getAllAppointments(user) {
+    return this.httpClient.get(`http://localhost:8080/appointment/${user.id}`).pipe(map((res: HttpResponse<any>) => res.body), map(valor => {
       valor.forEach(value => value.date = new Date(value.date));
       return valor;
     }))

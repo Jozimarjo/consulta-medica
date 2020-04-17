@@ -14,8 +14,7 @@
         <input required type="password" matInput name="password" #password="ngModel" [(ngModel)]="login.password">
       </mat-form-field>
     </div>
-    <app-error-message *ngIf="error?.error" [error]="error" (toggleError)="toggleError()"></app-error-message>
-
+    <app-message *ngIf="error?.error" [msg]="error?.message" [error]="true" (toggleMsg)="toggleError()"></app-message>
     <button type="submit" class="button-login" mat-stroked-button color="primary">Entrar</button>
     <div style="display: flex;justify-content: center;">
       <span>Não tem uma conta? </span> <a (click)="signup=true; " [routerLink]="[]" style="color:#0095f6;">

@@ -1,0 +1,8 @@
+<div [ngClass]="{'message-sucess':!error,'message-error':error }">
+  <div [ngClass]="{'label-sucess':!error,'label-error':error }">
+    {{msg}}
+    <a style="cursor: pointer" (click)="toggleMsg.next()">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+</div>
