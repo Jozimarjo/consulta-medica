@@ -86,7 +86,7 @@ export class ApppointmentFormComponent implements OnInit {
       },
       err => {
         this.alertMessage.msg = 'Error ao marcar a consulta';
-        this.alertMessage.msg = err.message;
+        this.alertMessage.msg = err.error.message;
         this.alertMessage.error = true;
         this.alertMessage.show = true;
       }
