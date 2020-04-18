@@ -60,10 +60,10 @@ export class ApppointmentFormComponent implements OnInit {
 
   loadHours(date) {
     this.hour = []
-    if(this.model.doctor)
-    this.appointService.getAllHoursForDoctorandDay(this.model.doctor.id, date.toISOString()).pipe(map((res: number[]) => res.map(re => re.toString().concat(':00')))).subscribe(
-      res => this.hour = res
-    )
+    if (this.model.doctor)
+      this.appointService.getAllHoursForDoctorandDay(this.model.doctor.id, date.toISOString()).pipe(map((res: number[]) => res.map(re => re.toString().concat(':00')))).subscribe(
+        res => this.hour = res
+      )
 
   }
 
@@ -86,6 +86,7 @@ export class ApppointmentFormComponent implements OnInit {
       },
       err => {
         this.alertMessage.msg = 'Error ao marcar a consulta';
+        this.alertMessage.msg = err.message;
         this.alertMessage.error = true;
         this.alertMessage.show = true;
       }
